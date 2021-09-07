@@ -18,7 +18,7 @@ if __name__== '__main__':
     url = url_builder(nombre,numero)
     # starting scraper
     page = func.HomePage(website,url)
-
+    [page.click_next for i in range(0,10)]
     jugador_id = page.player_name
     print(jugador_id)
     print("\n")
@@ -27,17 +27,16 @@ if __name__== '__main__':
     loby_kd = page.get_loby_kd
     kills_and_kd = page.get_kills
 
-    # print("La longitud de game_mode "+str(len(game_mode)))
-    # print("La longitud de place "+str(len(place)))
-    # print("La longitud de loby_kd "+str(len(loby_kd)))
-    # print("La longitud de kills_and_kd "+str(len(kills_and_kd)))
+
     '''
     At this moment loby kd doesn exist if the game mode is blood money
     '''
     loby_kd_indx = 0
+    allowed_game_mode = ['BR Solos','BR Duos','BR Trios','BR Quads',
+                        'BR Buyback Solos','BR Buyback Duos','BR Buyback Trios','BR Buyback Quads']
     for index_list in range(0,len(place)):
         list = []
-        if game_mode[index_list].text != "Blood Money":
+        if game_mode[index_list].text in allowed_game_mode:
             list.append(game_mode[index_list].text)
             list.append(place[index_list].text)
             list.append(loby_kd[loby_kd_indx].text)

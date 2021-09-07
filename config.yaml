@@ -7,3 +7,4 @@ WEBSITES:
       game_mode: '//div[@class="match-row__details"]/div[@class="match-row__value"]'
       loby_kd: '//div[@class="match-row__kd"]/div[@class="match-row__value"]'
       kills: '//div[@class="match-row__stats-stat"]/div[@class="match-row__value"]'
+      button: '//span[@class="trn-gamereport-list__group-more"]/button[@class="trn-button"]'

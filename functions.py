@@ -10,6 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
+import time
 
 class COD_Tracker:
     def __init__(self,web_page,url):
@@ -81,6 +82,13 @@ class HomePage(COD_Tracker):
     @property
     def get_kills(self):
         return self._extract_all(self._xpath_dir['kills'])
+
+    @property
+    def click_next(self):
+        button = self._extract_one(self._xpath_dir['button'])
+        button.click()
+        time.sleep(2)
+
 
     @property
     def close_connection(self):
