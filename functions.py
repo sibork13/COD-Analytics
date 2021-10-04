@@ -87,7 +87,7 @@ class HomePage(COD_Tracker):
     def click_next(self):
         button = self._extract_one(self._xpath_dir['button'])
         button.click()
-        time.sleep(2)
+        time.sleep(5)
 
 
     @property
