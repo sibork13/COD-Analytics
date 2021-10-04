@@ -32,8 +32,9 @@ if __name__== '__main__':
     At this moment loby kd doesn exist if the game mode is blood money
     '''
     loby_kd_indx = 0
-    allowed_game_mode = ['BR Solos','BR Duos','BR Trios','BR Quads',
-                        'BR Buyback Solos','BR Buyback Duos','BR Buyback Trios','BR Buyback Quads']
+    # Reading allowed game modes
+    with open('Game_Mode.txt',mode='r') as f:
+        allowed_game_mode = list(f.read().split(",\n"))
     for index_list in range(0,len(place)):
         list = []
         if game_mode[index_list].text in allowed_game_mode:

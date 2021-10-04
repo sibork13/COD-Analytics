@@ -1,0 +1,10 @@
+BR Solos,
+BR Duos,
+BR Trios,
+BR Quads,
+BR Buyback Solos,
+BR Buyback Duos,
+BR Buyback Trios,
+BR Buyback Quads,
+Realism Battle Royale,
+Iron Trials '84

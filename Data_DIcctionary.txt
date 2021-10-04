@@ -1,0 +1,55 @@
+INFO POR partida
+LugarDePartida, NOmbre, TiempoJugado, KDJugador, Kills, Deaths, Asists
+
+INFO GENERAL
+Place, GameTipe, LobbyK/D, Kills, KDMatch, Partners and kille per partner
+
+
+-************************PROPUESTA DE TABLAS*********************-
+Player
+ID_PLAYER, Name, K/D, Platform, Country
+
+General_Matches
+ID_PLAYER, ID_Match, Place, Gametype, LobyKD,  Kills
+
+Match_Summary
+ID_Match,Team_ID, PLayer_Name, KD, kills, Deaths, Asists
+
+
+###Data Dicctionary
+
+# Player
+'''
+This table saves all general data of target player
+'''
+
+  -ID_PLAYER(PK): main player id, this identifies target player 
+  -Name: Name from warzone of target player
+  -K/D: K/D player
+  -Platform: Platform where player plays
+  -Country: Coutry where target plays
+  
+# General Matches
+'''
+This table saves general information about player in every match
+'''
+   -ID_PLAYER(FK): target player id
+   -ID_Match(PK): Match identifier
+   -Place: Place of main match of tartget player
+   -Gametype: Gamemode of main match
+   -LobyKD: K/D of main match, codtracker uses average KD of all players
+   -Kills: Total Kills of target player in main match
+  
+# Match Summary
+'''
+This table saves specific info of every match 
+'''
+  -ID_Match(FK): Match identifier
+  -Team_ID: Team identifier
+  -Player_Name: Name of every enemy of the main match (enemy of target player)
+  -KD: KD of enemy player
+  -kills: Total number of kills of enemy
+  -Deaths: Total number of death in main match
+  -Assist: Total of assist elimination of main enemy
+  
+
