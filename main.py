@@ -18,7 +18,7 @@ if __name__== '__main__':
     url = url_builder(nombre,numero)
     # starting scraper
     page = func.HomePage(website,url)
-    [page.click_next for i in range(0,10)]
+    [page.click_next for i in range(0,2)]
     jugador_id = page.player_name
     print(jugador_id)
     print("\n")
@@ -26,6 +26,7 @@ if __name__== '__main__':
     place = page.get_place
     loby_kd = page.get_loby_kd
     kills_and_kd = page.get_kills
+    every_match_link_list = page.get_main_match
 
 
     '''
@@ -35,6 +36,7 @@ if __name__== '__main__':
     # Reading allowed game modes
     with open('Game_Mode.txt',mode='r') as f:
         allowed_game_mode = list(f.read().split(",\n"))
+    # filtering matches, only allow game mode matches
     for index_list in range(0,len(place)):
         list = []
         if game_mode[index_list].text in allowed_game_mode:
@@ -43,8 +45,8 @@ if __name__== '__main__':
             list.append(loby_kd[loby_kd_indx].text)
             list.append(kills_and_kd[index_list*2].text)
             list.append(kills_and_kd[index_list*2+1].text)
-            print("Partida")
-            print(list)
+            # print("Partida")
+            # print(list)
             loby_kd_indx += 1
         else:
             print("NO SUEM NADA")

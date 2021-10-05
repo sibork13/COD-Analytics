@@ -29,14 +29,9 @@ class COD_Tracker:
         try:
         	player_name = WebDriverWait(self._driver,10)\
         			.until(
-        			EC.presence_of_element_located((By.XPATH,'//span[@class="trn-ign__username"]'))
+        			EC.presence_of_element_located((By.XPATH,'//div[@class="trn-gamereport-list__group"]/span[@class="trn-gamereport-list__group-more"]/button[@class="trn-button"]'))
         			)
         	print("Ya se extrajo el nombre")
-            # button = WebDriverWait(self._driver,10)\
-        	# 		.until(
-        	# 		EC.presence_of_element_located((By.XPATH,'//span[@class="trn-gamereport-list__group-more"]/a[@class="trn-button trn-button--block"]'))
-        	# 		)
-        	#print("Ya se extrajo el nombre")
         except TimeoutException:
         	print("nO")
 
@@ -46,6 +41,11 @@ class COD_Tracker:
 
     def _extract_all(self,xpath):
         return self._driver.find_elements_by_xpath(xpath)
+
+    def _extract_href(self,xpath):
+        # print(self._driver.find_element_by_xpath(xpath))
+        return [a_tag.get_attribute("href") for a_tag in self._driver.find_elements_by_xpath(xpath)]
+
 
 
     def _close(self):
@@ -59,13 +59,11 @@ class HomePage(COD_Tracker):
     @property
     def player_name(self):
         name = self._extract_one(self._xpath_dir['player_name_xpath']).text
-        #self._close()
         return name
 
     @property
     def matches_list(self):
         listmatch = self._extract_all(self._xpath_dir['match_list_page'])
-        #self._close()
         return listmatch
     @property
     def get_place(self):
@@ -89,7 +87,16 @@ class HomePage(COD_Tracker):
         button.click()
         time.sleep(5)
 
+    @property
+    def get_main_match(self):
+        return self._extract_href(self._xpath_dir['a_tag'])
 
     @property
     def close_connection(self):
         self._close()
+
+class MatchPage(COD_Tracker):
+    def __init__(self,web_page,url):
+        super().__init__(webáge,url)
+
+    
