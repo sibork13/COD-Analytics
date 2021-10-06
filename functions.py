@@ -27,11 +27,18 @@ class COD_Tracker:
         self._driver = webdriver.Firefox(executable_path='driver/geckodriver',options=options)
         self._driver.get(url)
         try:
-        	player_name = WebDriverWait(self._driver,10)\
-        			.until(
-        			EC.presence_of_element_located((By.XPATH,'//div[@class="trn-gamereport-list__group"]/span[@class="trn-gamereport-list__group-more"]/button[@class="trn-button"]'))
-        			)
-        	print("Ya se extrajo el nombre")
+            if 'handle' in url:
+                print("EXTRACTING PLAYERS PAGE")
+                player_name = WebDriverWait(self._driver,10).until(
+                EC.presence_of_element_located(
+                (By.XPATH,'//div[@class="player-header"]/div[@class="button"]')))
+            else:
+                print("SCRAPING HOME PAGE")
+                player_name = WebDriverWait(self._driver,10).until(
+                EC.presence_of_element_located(
+                (By.XPATH,'//div[@class="trn-gamereport-list__group"]/span[@class="trn-gamereport-list__group-more"]/button[@class="trn-button"]')))
+
+            print("Ya se extrajo el nombre")
         except TimeoutException:
         	print("nO")
 
@@ -95,8 +102,39 @@ class HomePage(COD_Tracker):
     def close_connection(self):
         self._close()
 
+
 class MatchPage(COD_Tracker):
     def __init__(self,web_page,url):
-        super().__init__(webáge,url)
+        super().__init__(web_page,url)
+
+    @property
+    def extract_players_stats(self):
+        return self._extract_all(self._xpath_dir['player'])
+
+    @property
+    def extract_butons(self):
+        return self._extract_all(self._xpath_dir['b_stats'])
 
     
+    def click_open_stats(self,button):
+        button.click()
+
+    @property
+    def close_connection(self):
+        self._close()
+
+    # @property
+    # def extract_players_KD(self):
+    #     return self._driver._extract_all(self._xpath_dir[])
+    #
+    # @property
+    # def extract_players_kills(self):
+    #     return self._driver._extract_all(self._xpath_dir[])
+    #
+    # @property
+    # def extract_players_deaths(self):
+    #     return self._driver._extract_all(self._xpath_dir[])
+    #
+    # @property
+    # def extract_players_assists(self):
+    #     return self._driver._extract_all(self._xpath_dir[])

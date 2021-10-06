@@ -9,3 +9,5 @@ WEBSITES:
       kills: '//div[@class="match-row__stats-stat"]/div[@class="match-row__value"]'
       button: '//div[@class="trn-gamereport-list__group"]/span[@class="trn-gamereport-list__group-more"]/button[@class="trn-button"]'
       a_tag: '//a[@class="match-row__link"]'
+      b_stats: '//div[@class="player"]/div[@class="player-header"]'
+      player: '//div[@class="player-details"]/div[@class="left"]/div[@class="stat"]/div'
