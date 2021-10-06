@@ -115,9 +115,13 @@ class MatchPage(COD_Tracker):
     def extract_butons(self):
         return self._extract_all(self._xpath_dir['b_stats'])
 
-    
+
     def click_open_stats(self,button):
         button.click()
+
+    # @property 
+    # def extract_enemy_name(self):
+    #     return self._extract_all
 
     @property
     def close_connection(self):

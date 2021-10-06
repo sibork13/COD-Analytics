@@ -52,5 +52,6 @@ This table saves specific info of every match
   -Deaths: Total number of death in main match
   -Assist: Total of assist elimination of main enemy
   -Damage: Total damage maked
+  -Score: Total score earned
   
 

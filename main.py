@@ -12,13 +12,16 @@ def url_builder(player_name,player_number):
 def match_info(website,url):
     match_page = func.MatchPage(website,url)
     buttons_list = match_page.extract_butons
-    # stats = match_page.extract_players_stats
     for button in buttons_list:
         match_page.click_open_stats(button)
-        stats = match_page.extract_players_stats
-        for stat in stats:
-            print(stat.text)
-        match_page.click_open_stats(button)
+    stats = match_page.extract_players_stats
+    stats_list = []
+    allowed_metrics =['Kills','Deaths','Assists','Damage','Score']
+    for i in range(0,len(stats),2):
+        if stats[i].text in allowed_metrics:
+            stats_list.append(stats[i].text)
+            stats_list.append(stats[i+1].text)
+    print(stats_list)
     match_page.close_connection
 
 
