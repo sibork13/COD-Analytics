@@ -10,5 +10,6 @@ WEBSITES:
       button: '//div[@class="trn-gamereport-list__group"]/span[@class="trn-gamereport-list__group-more"]/button[@class="trn-button"]'
       a_tag: '//a[@class="match-row__link"]'
       b_stats: '//div[@class="player"]/div[@class="player-header"]'
-      player: '//div[@class="player-details"]/div[@class="left"]/div[@class="stat"]/div'
+      player: './/div[@class="player-details"]/div[@class="left"]/div[@class="stat"]/div'
       enemy_name: '//div[@class="player-header"]/div[@class="name"]/a'
+      test_block_player : '//div[@class="team"]'

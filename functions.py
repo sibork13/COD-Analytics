@@ -119,26 +119,25 @@ class MatchPage(COD_Tracker):
     def click_open_stats(self,button):
         button.click()
 
-    # @property 
-    # def extract_enemy_name(self):
-    #     return self._extract_all
+    @property
+    def extract_enemy_name(self):
+        return self._extract_all(self._xpath_dir['enemy_name'])
 
     @property
     def close_connection(self):
         self._close()
 
-    # @property
-    # def extract_players_KD(self):
-    #     return self._driver._extract_all(self._xpath_dir[])
-    #
-    # @property
-    # def extract_players_kills(self):
-    #     return self._driver._extract_all(self._xpath_dir[])
-    #
-    # @property
-    # def extract_players_deaths(self):
-    #     return self._driver._extract_all(self._xpath_dir[])
-    #
-    # @property
-    # def extract_players_assists(self):
-    #     return self._driver._extract_all(self._xpath_dir[])
+    @property
+    def test_get_player_block(self):
+        allowed_metrics =['Kills','Deaths','Assists','Damage','Score']
+        bloc = self._extract_all(self._xpath_dir['test_block_player'])
+        stats_list = []
+        for i_bloc in bloc:
+            test_stats = i_bloc.find_elements_by_xpath(self._xpath_dir['player'])
+            for j in range(0,len(test_stats)):
+                if test_stats[j].text in allowed_metrics:
+                    stats_list.append(test_stats[j].text)
+                    stats_list.append(test_stats[j+1].text)
+        # for jj in range(0,len(stats_list),10):
+        #     print(stats_list[jj:jj+10])
+        return stats_list

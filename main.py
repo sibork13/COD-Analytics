@@ -14,15 +14,11 @@ def match_info(website,url):
     buttons_list = match_page.extract_butons
     for button in buttons_list:
         match_page.click_open_stats(button)
-    stats = match_page.extract_players_stats
-    stats_list = []
-    allowed_metrics =['Kills','Deaths','Assists','Damage','Score']
-    for i in range(0,len(stats),2):
-        if stats[i].text in allowed_metrics:
-            stats_list.append(stats[i].text)
-            stats_list.append(stats[i+1].text)
-    print(stats_list)
+    players_stats = match_page.test_get_player_block
     match_page.close_connection
+    for future_row in range(0,len(players_stats),10):
+        print(players_stats[future_row:future_row+10])
+
 
 
 if __name__== '__main__':
@@ -73,11 +69,10 @@ if __name__== '__main__':
             # print("NO SUEM NADA")
 
     page.close_connection
-    # print(good_index_list)
-    # # starting scrape match per match
     for i in good_index_list[0:1]:
         print(i)
         print('*****************INFO DE LA PARTIDA *********************')
         match_info(website,every_match_link_list[i])
+
 
     print("FIN DE LA EJECUCION")
