@@ -94,21 +94,6 @@ class HomePage(COD_Tracker):
                         list.append(loby_kd[index].text)
                         list.append(kills[index].text)
         return list,match_List
-    # @property
-    # def get_place(self):
-    #     return self._extract_all(self._xpath_dir['place'])
-    #
-    # @property
-    # def get_game_mode(self):
-    #     return self._extract_all(self._xpath_dir['game_mode'])
-    #
-    # @property
-    # def get_loby_kd(self):
-    #     return self._extract_all(self._xpath_dir['loby_kd'])
-    #
-    # @property
-    # def get_kills(self):
-    #     return self._extract_all(self._xpath_dir['kills'])
 
     @property
     def click_next(self):
@@ -116,9 +101,6 @@ class HomePage(COD_Tracker):
         button.click()
         time.sleep(5)
 
-    # @property
-    # def get_main_match(self):
-    #     return self._extract_href(self._xpath_dir['a_tag'])
 
     @property
     def close_connection(self):
@@ -129,9 +111,6 @@ class MatchPage(COD_Tracker):
     def __init__(self,web_page,url):
         super().__init__(web_page,url)
 
-    # @property
-    # def extract_players_stats(self):
-    #     return self._extract_all(self._xpath_dir['player'])
 
     @property
     def extract_butons(self):

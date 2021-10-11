@@ -18,7 +18,7 @@ def match_info(website,url):
     match_page.close_connection
     player_name_index = 0
     for future_row in range(0,len(players_stats),10):
-        print(players_name[player_name_index])
+        print(players_name[player_name_index].text)
         print(players_stats[future_row:future_row+10])
         print("*********************")
         player_name_index += 1
@@ -37,12 +37,6 @@ if __name__== '__main__':
     jugador_id = page.player_name
     print(jugador_id)
     print("\n")
-    # game_mode = page.get_game_mode
-    # place = page.get_place
-    # loby_kd = page.get_loby_kd
-    # kills_and_kd = page.get_kills
-    # every_match_link_list = page.get_main_match
-
 
     '''
     At this moment loby kd doesn exist if the game mode is blood money
@@ -56,34 +50,12 @@ if __name__== '__main__':
 
 
 
-    # for i in range(0,len(all_matches_list),4):
-    #     print(all_matches_list[i:i+4])
-
-    # # creating a list of good indexes to scrape match per match after
-    # good_index_list = []
-    # # filtering matches, only allow game mode matches
-    # for index_list in range(0,len(place)):
-    #     list = []
-    #     if game_mode[index_list].text in allowed_game_mode:
-    #         good_index_list.append(index_list)
-    #         list.append(game_mode[index_list].text)
-    #         list.append(place[index_list].text)
-    #         list.append(loby_kd[loby_kd_indx].text)
-    #         list.append(kills_and_kd[index_list*2].text)
-    #         list.append(kills_and_kd[index_list*2+1].text)
-    #         print("Partida")
-    #         print(list)
-    #         loby_kd_indx += 1
-    #     else:
-    #         pass
-    #
-
     page.close_connection
-    for link in every_matrch_link_list[0:5]:
+    for link in every_matrch_link_list[0:1]:
         # print(i)
         print('*****************INFO DE LA PARTIDA *********************')
         print(link)
-        # match_info(website,link)
+        match_info(website,link)
 
 
     print("FIN DE LA EJECUCION")
