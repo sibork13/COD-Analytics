@@ -26,8 +26,10 @@ def match_info(website,url):
 
 
 if __name__== '__main__':
-    nombre='sibork13'
-    numero = '1199'
+    # nombre='sibork13'
+    # numero = '1199'
+    nombre='opmarked'
+    numero = '1818'
     website = 'CODTRACKER'
 
     url = url_builder(nombre,numero)
