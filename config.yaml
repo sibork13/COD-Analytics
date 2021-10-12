@@ -14,3 +14,5 @@ WEBSITES:
       player: './/div[@class="player-details"]/div[@class="left"]/div[@class="stat"]/div'
       enemy_name: './/div[@class="player-header"]/div[@class="name"]/a'
       test_block_player : '//div[@class="team"]'
+      test_placement: './/div[@class="placement"]/div'
+      test_team_plaers: './/div[@class="player"]'

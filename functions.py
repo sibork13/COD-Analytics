@@ -38,7 +38,7 @@ class COD_Tracker:
                 EC.presence_of_element_located(
                 (By.XPATH,'//div[@class="trn-gamereport-list__group"]/span[@class="trn-gamereport-list__group-more"]/button[@class="trn-button"]')))
 
-            print("Ya se extrajo el nombre")
+            print("Se accedio a la pagina")
         except TimeoutException:
         	print("nO")
 
@@ -79,20 +79,25 @@ class HomePage(COD_Tracker):
         for date in matches_per_date:
             listmatch = date.find_elements_by_xpath(self._xpath_dir['listmatch'])
             for match in listmatch:
-                place = match.find_elements_by_xpath(self._xpath_dir['place'])
-                game_mode = match.find_elements_by_xpath(self._xpath_dir['game_mode'])
+                place = match.find_elements_by_xpath(self._xpath_dir['place'])[0]
+                game_mode = match.find_elements_by_xpath(self._xpath_dir['game_mode'])[0]
                 loby_kd = match.find_elements_by_xpath(self._xpath_dir['loby_kd'])
-                kills = match.find_elements_by_xpath(self._xpath_dir['kills'])
-                match_link = [a_tag.get_attribute("href") for a_tag in match.find_elements_by_xpath('.//a[@class="match-row__link"]')]
-                for index in range(0,len(place)):
-                    if game_mode[index].text in allowed_game_mode_list:
-                        # print(game_mode[index].text)
-                        #here will separate data for match
-                        match_List.append(match_link[index])
-                        list.append(place[index].text)
-                        list.append(game_mode[index].text)
-                        list.append(loby_kd[index].text)
-                        list.append(kills[index].text)
+                kills = match.find_elements_by_xpath(self._xpath_dir['kills'])[0]
+                match_link = [a_tag.get_attribute("href") for a_tag in match.find_elements_by_xpath('.//a[@class="match-row__link"]')][0]
+                # print(len(place))
+                # print(loby_kd)
+                if game_mode.text in allowed_game_mode_list:
+                    # somethmes kd doesn exist
+                    if len(loby_kd) == 0 :
+                        loby_kd = 'NA'
+                    else:
+                        loby_kd = loby_kd[0]
+                    #here will separate data for match
+                    match_List.append(match_link)
+                    list.append(place.text)
+                    list.append(game_mode.text)
+                    list.append(loby_kd.text)
+                    list.append(kills.text)
         return list,match_List
 
     @property
@@ -133,11 +138,27 @@ class MatchPage(COD_Tracker):
         allowed_metrics =['Kills','Deaths','Assists','Damage','Score']
         bloc = self._extract_all(self._xpath_dir['test_block_player'])
         stats_list = []
+        test_enemies = []
         for i_bloc in bloc:
-            test_stats = i_bloc.find_elements_by_xpath(self._xpath_dir['player'])
-            test_enemies = i_bloc.find_elements_by_xpath(self._xpath_dir['enemy_name'])
-            for j in range(0,len(test_stats)):
-                if test_stats[j].text in allowed_metrics:
-                    stats_list.append(test_stats[j].text)
-                    stats_list.append(test_stats[j+1].text)
-        return stats_list,test_enemies
+            # Is time to extract every player bloc from team block
+            team_players = i_bloc.find_elements_by_xpath(self._xpath_dir['test_team_plaers'])
+            team_placement = i_bloc.find_element_by_xpath(self._xpath_dir['test_placement']).text
+            for player in team_players:
+                test_enemies = []
+                try:
+                    enemy_name = player.find_element_by_xpath(self._xpath_dir['enemy_name']).text
+                except:
+                    enemy_name = 'NA'
+                # Adding player name
+                test_enemies.append(enemy_name)
+                # Adding team place
+                test_enemies.append(team_placement)
+                # Extracting stats for player
+                enemy_stats = player.find_elements_by_xpath(self._xpath_dir['player'])
+                # Iterating returned list to take only important metrics
+                for j in range(0,len(enemy_stats)):
+                    if enemy_stats[j].text in allowed_metrics:
+                        test_enemies.append(enemy_stats[j].text)
+                        test_enemies.append(enemy_stats[j+1].text)
+                stats_list.append(test_enemies)
+        return stats_list

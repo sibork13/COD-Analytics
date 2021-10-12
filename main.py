@@ -5,7 +5,8 @@ Main script to scrape
 import functions as func
 
 def url_builder(player_name,player_number):
-    url = 'https://cod.tracker.gg/warzone/profile/battlenet/'
+    # url = 'https://cod.tracker.gg/warzone/profile/battlenet/'
+    url = 'https://cod.tracker.gg/warzone/profile/atvi/'
     url = url+str(player_name) + '%23' + str(player_number) + '/matches'
     return url
 
@@ -14,22 +15,21 @@ def match_info(website,url):
     buttons_list = match_page.extract_butons
     for button in buttons_list:
         match_page.click_open_stats(button)
-    players_stats,players_name = match_page.test_get_player_block
+    players_stats = match_page.test_get_player_block
+    for row in players_stats:
+        print(row)
+    # for future_row in range(0,len(players_stats),12):
+        # print(players_stats[future_row:future_row+12])
+        # print("*********************")
     match_page.close_connection
-    player_name_index = 0
-    for future_row in range(0,len(players_stats),10):
-        print(players_name[player_name_index].text)
-        print(players_stats[future_row:future_row+10])
-        print("*********************")
-        player_name_index += 1
 
 
 
 if __name__== '__main__':
     # nombre='sibork13'
     # numero = '1199'
-    nombre='opmarked'
-    numero = '1818'
+    nombre='manny'
+    numero = '4039159'
     website = 'CODTRACKER'
 
     url = url_builder(nombre,numero)
@@ -37,6 +37,7 @@ if __name__== '__main__':
     page = func.HomePage(website,url)
     [page.click_next for i in range(0,2)]
     jugador_id = page.player_name
+
     print(jugador_id)
     print("\n")
 
@@ -50,11 +51,11 @@ if __name__== '__main__':
 
     all_matches_list,every_matrch_link_list = page.matches_list(allowed_game_mode)
 
-
+    # for i in range(0,len(all_matches_list),4):
+    #     print(all_matches_list[i:i+4])
 
     page.close_connection
     for link in every_matrch_link_list[0:1]:
-        # print(i)
         print('*****************INFO DE LA PARTIDA *********************')
         print(link)
         match_info(website,link)
