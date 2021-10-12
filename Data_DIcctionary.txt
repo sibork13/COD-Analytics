@@ -41,7 +41,7 @@ This table saves general information about player in every match
    -Kills: Total Kills of target player in main match
   
 # Match Summary
-'''
+'''KD
 This table saves specific info of every match 
 '''
   -ID_Match(FK): Match identifier
@@ -51,5 +51,7 @@ This table saves specific info of every match
   -kills: Total number of kills of enemy
   -Deaths: Total number of death in main match
   -Assist: Total of assist elimination of main enemy
+  -Damage: Total damage maked
+  -Score: Total score earned
   
 
